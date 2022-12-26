@@ -6,8 +6,19 @@ declare global {
 		id: string;
 		subCategories?: Category[];
 	}
-
 	type Categories = Category[];
+  
+  interface Product {
+    id?: string,
+    title: string,
+    subtitle: string,
+    imageSource: string,
+    rating:  number,
+    price: number,
+    discount: number,
+    category: Category,
+  }
+  type Products = Product[]
 }
 
 declare module '@mui/material/styles' {

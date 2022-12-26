@@ -4,7 +4,6 @@ import {
 	CardActions,
 	CardContent,
 	CardMedia,
-	Chip,
 	Paper,
 	Rating,
 	Typography,
@@ -12,16 +11,12 @@ import {
 import { Stack } from "@mui/system";
 
 interface CardProps {
-	id?: string;
-	title: string;
-	subtitle: string;
-	imageSource: string;
-	rating: number;
-	price: number;
-	discount?: number;
+	productData: Product
 }
 
 export default function (props: CardProps) {
+	const { productData } = props;
+
 	return (
 		<Card
 			sx={{
@@ -44,9 +39,9 @@ export default function (props: CardProps) {
 					height="180px"
 					component="img"
 					src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-					alt={`${props.title} image`}
+					alt={`${productData.title} image`}
 				/>
-				{props.discount && (
+				{productData.discount && (
 					<Paper
 						sx={{
 							height: 18,
@@ -63,22 +58,27 @@ export default function (props: CardProps) {
 							left: 8,
 						}}
 					>
-						- {props.discount} %
+						- {productData.discount} %
 					</Paper>
 				)}
 			</div>
 			<CardContent sx={{ p: 0, mt: 2 }}>
 				<Typography variant="body1" sx={{ fontWeight: 500 }}>
-					{props.title}
+					{productData.title}
 				</Typography>
 				<Typography
 					variant="caption"
 					sx={{ color: "#575757", mt: 0.25 }}
 					component="p"
 				>
-					{props.subtitle}
+					{productData.subtitle}
 				</Typography>
-				<Rating readOnly value={props.rating} size="small" sx={{ my: 1 }} />
+				<Rating
+					readOnly
+					value={productData.rating}
+					size="small"
+					sx={{ my: 1 }}
+				/>
 			</CardContent>
 			<CardActions sx={{ px: 0, mt: 2 }}>
 				<Stack
@@ -89,16 +89,21 @@ export default function (props: CardProps) {
 				>
 					<Stack>
 						<Typography sx={{ fontWeight: 600, fontSize: "18px" }}>
-							{props.discount
-								? ((props.price * (100 - props.discount))/100).toFixed(
-										2
-								  )
-								: props.price}{" "}
+							{productData.discount
+								? (
+										(productData.price * (100 - productData.discount)) /
+										100
+								  ).toFixed(2)
+								: productData.price}{" "}
 							USD
 						</Typography>
-            {props.discount && <Typography sx={{fontWeight: 600, color: "#A9A9A9", fontSize: "12px"}}>
-              {props.price}
-            </Typography>}
+						{productData.discount && (
+							<Typography
+								sx={{ fontWeight: 600, color: "#A9A9A9", fontSize: "12px" }}
+							>
+								{productData.price.toFixed(2)}
+							</Typography>
+						)}
 					</Stack>
 					<Button
 						variant="contained"
@@ -106,9 +111,9 @@ export default function (props: CardProps) {
 							border: "solid 2px #46760A",
 							background: "#6A983C",
 							borderRadius: "12px",
-              "&:hover": {
-                background: "#46760A"
-              }
+							"&:hover": {
+								background: "#46760A",
+							},
 						}}
 					>
 						Add to cart

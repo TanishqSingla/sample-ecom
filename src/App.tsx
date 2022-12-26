@@ -8,7 +8,17 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<Layout>
 				<main>
-					<ProductCard title="test" subtitle="lorem ipsum dolor" rating={3} price={48.56} imageSource="" discount={36}/>
+					<ProductCard
+						productData={{
+							title: "test",
+							subtitle: "lorem ipsum dolor",
+							rating: 3,
+							imageSource: "",
+							discount: 36,
+							price: 48.0,
+							category: { categoryName: "Electronics", id: "electronics" },
+						}}
+					/>
 				</main>
 			</Layout>
 		</ThemeProvider>
