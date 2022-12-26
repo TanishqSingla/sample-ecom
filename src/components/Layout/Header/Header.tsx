@@ -86,13 +86,20 @@ export default function () {
 				open={open}
 				anchorEl={anchorEl}
 				anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-				transformOrigin={{vertical: "top", horizontal: "right"}}
+				transformOrigin={{ vertical: "top", horizontal: "right" }}
 				onClose={() => setAnchorEl(null)}
 			>
 				<Stack sx={{ width: 400, p: 2, minHeight: 600 }}>
 					<Stack direction="row" justifyContent="space-between">
-						<Typography sx={{fontSize: '26px', fontWeight: 600}}>Shopping Cart</Typography>
-						<IconButton onClick={() => setAnchorEl(null)}><Close /></IconButton>
+						<Typography sx={{ fontSize: "26px", fontWeight: 600 }}>
+							Shopping Cart
+						</Typography>
+						<IconButton onClick={() => setAnchorEl(null)}>
+							<Close />
+						</IconButton>
+					</Stack>
+					<Stack sx={{flex: 1}} justifyContent="center" alignItems="center">
+						<Typography>Cart Empty</Typography>
 					</Stack>
 				</Stack>
 			</Popover>
