@@ -20,7 +20,7 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<CartContext.Provider value={{state, dispatch}}>
+			<CartContext.Provider value={[state, dispatch]}>
 				<Layout>
 					<main style={{ marginTop: "4rem", height: "100%" }}>
 						<Stack

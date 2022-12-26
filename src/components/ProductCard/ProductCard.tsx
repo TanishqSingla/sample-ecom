@@ -9,6 +9,8 @@ import {
 	Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useContext } from "react";
+import { CartContext } from "../../utils/contexts/cartContext";
 
 interface CardProps {
 	productData: Product;
@@ -16,6 +18,8 @@ interface CardProps {
 
 export default function (props: CardProps) {
 	const { productData } = props;
+
+	const [state, dispatch] = useContext(CartContext);
 
 	return (
 		<Card
@@ -121,6 +125,7 @@ export default function (props: CardProps) {
 					</Stack>
 					<Button
 						variant="contained"
+						onClick={() => dispatch({type: "ADD", payload: productData})}
 						sx={{
 							border: "solid 2px #46760A",
 							background: "#6A983C",

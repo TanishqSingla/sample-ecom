@@ -16,10 +16,13 @@ import {
 	Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useCartContext } from "../../../utils/contexts/cartContext";
 import NavItem from "../UI/NavItem/NavItem";
 
 export default function () {
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+	const [cartState, dispatch] = useCartContext();
 
 	const open = Boolean(anchorEl);
 
@@ -73,7 +76,7 @@ export default function () {
 						onClick={(event) => setAnchorEl(event.currentTarget)}
 					>
 						<Badge
-							badgeContent={2}
+							badgeContent={cartState.length || 0}
 							color="secondary"
 							anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
 						>
@@ -98,9 +101,14 @@ export default function () {
 							<Close />
 						</IconButton>
 					</Stack>
-					<Stack sx={{flex: 1}} justifyContent="center" alignItems="center">
-						<Typography>Cart Empty</Typography>
-					</Stack>
+					{!cartState.length ? (
+						<Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">
+							<Typography>Cart Empty</Typography>
+						</Stack>
+					) : (
+						<Stack>
+						</Stack>
+					)}
 				</Stack>
 			</Popover>
 		</>
