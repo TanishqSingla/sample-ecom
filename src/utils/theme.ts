@@ -10,6 +10,9 @@ export const theme = createTheme({
 			dark: "#151515",
 			light: "#fff",
 		},
+    secondary: {
+      main: "#E6704B"
+    }
 	},
 	typography: {
 		fontFamily: ["Poppins", "sans-serif"].join(","),
