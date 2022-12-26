@@ -1,12 +1,15 @@
 import {
 	AccountCircleOutlined,
 	Close,
+	DataSaverOff,
+	FavoriteBorderOutlined,
 	Search,
 	ShoppingBagOutlined,
 } from "@mui/icons-material";
 import {
 	Badge,
 	Box,
+	Button,
 	Divider,
 	IconButton,
 	InputBase,
@@ -15,14 +18,14 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { useCartContext } from "../../../utils/contexts/cartContext";
+import { useContext, useState } from "react";
+import { CartContext } from "../../../utils/contexts/cartContext";
 import NavItem from "../UI/NavItem/NavItem";
 
 export default function () {
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-	const [cartState, dispatch] = useCartContext();
+	const [cartState, dispatch] = useContext(CartContext);
 
 	const open = Boolean(anchorEl);
 
@@ -105,9 +108,56 @@ export default function () {
 						<Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">
 							<Typography>Cart Empty</Typography>
 						</Stack>
-					) : (
-						<Stack>
-						</Stack>
+					) : (cartState.map((cart) => {
+						return <Stack sx={{p: 2}}>
+							<div style={{ display: "flex" }}>
+								<div>
+									<div
+										style={{
+											height: 68,
+											width: 100,
+											overflow: "hidden",
+											borderRadius: 12,
+										}}
+									>
+										<img
+											style={{ objectFit: "contain" }}
+											src={cartState[0].product.imageSource}
+											width="100%"
+											height="100%"
+										/>
+									</div>
+									<Stack>
+										<Button
+											sx={{color: "#151515"}}
+											startIcon={<FavoriteBorderOutlined fontSize="small" />}
+										>
+											<Typography component="span" sx={{ fontSize: "12px" }}>
+												Wishlist
+											</Typography>
+										</Button>
+										<Button
+											sx={{color: "#151515"}}
+											startIcon={<DataSaverOff fontSize="small" />}
+										>
+											<Typography component="span" sx={{ fontSize: "12px" }}>
+												Compare
+											</Typography>
+										</Button>
+										<Button
+											sx={{color: "#151515"}}
+											onClick={() => dispatch({type: "REMOVE", payload: cart.product})}
+											startIcon={<Close fontSize="small" />}
+										>
+											<Typography component="span" sx={{ fontSize: "12px" }}>
+												Remove
+											</Typography>
+										</Button>
+									</Stack>
+								</div>
+							</div>
+							<Divider />
+						</Stack>})
 					)}
 				</Stack>
 			</Popover>
