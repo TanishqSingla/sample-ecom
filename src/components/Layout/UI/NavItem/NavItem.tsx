@@ -1,4 +1,4 @@
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { KeyboardArrowDown } from "@mui/icons-material";
 
@@ -17,7 +17,10 @@ export default function (props: Props) {
 
 	return (
 		<div>
-			<Button sx={{ color: "black" }} onClick={handleClick}>
+			<Button
+				sx={{ color: "#151515", textTransform: "none" }}
+				onClick={handleClick}
+			>
 				{props.children}
 				{props.items && <KeyboardArrowDown color="primary" />}
 			</Button>

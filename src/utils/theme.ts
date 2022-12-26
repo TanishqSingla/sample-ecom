@@ -11,4 +11,7 @@ export const theme = createTheme({
 			light: "#fff",
 		},
 	},
+	typography: {
+		fontFamily: ["Poppins", "sans-serif"].join(","),
+	},
 });

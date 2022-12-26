@@ -1,4 +1,4 @@
-import { AccountCircleOutlined } from "@mui/icons-material";
+import { AccountCircleOutlined, ShoppingBagOutlined } from "@mui/icons-material";
 import { Grid, IconButton, Stack, Typography } from "@mui/material";
 import NavItem from "../UI/NavItem/NavItem";
 
@@ -11,19 +11,21 @@ export default function () {
 				justifyContent="space-between"
 				sx={{ p: 4 }}
 			>
-				<Typography variant="h5">Sample Ecom</Typography>
-				<div>hellow</div>
+				<Typography>Sample Ecom</Typography>
+				<Stack direction="row">
+					
+				</Stack>
 				<Stack direction="row">
 					<IconButton>
-						<AccountCircleOutlined />
+						<AccountCircleOutlined sx={{color: "primary.dark"}} />
 					</IconButton>
 					<IconButton>
-
+						<ShoppingBagOutlined sx={{color: "primary.dark"}} />
 					</IconButton>
 				</Stack>
 			</Grid>
 			<nav style={{ background: "#F9F9F9", padding: "12px 24px", }}>
-				<Stack direction="row">
+				<Stack direction="row" gap="16px">
 					<NavItem items={["Bread", "Cakes"]}>Bakery</NavItem>
 					<NavItem items={["Seasonal", "Exotic"]}>Fruits and Vegetables</NavItem>
 					<NavItem>Meat and Fish</NavItem>
