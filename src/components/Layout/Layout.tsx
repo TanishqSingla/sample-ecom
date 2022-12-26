@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function(props: Props) {
-  return <Container maxWidth="lg" style={{background: "#000", height: "100vh"}}>
+  return <Container maxWidth="lg" style={{background: "#fdfdfd", padding: 0}}>
     <Header />
     {props.children}
   </Container>

@@ -1,10 +1,14 @@
-import Layout from "./components/Layout";
+import { ThemeProvider } from "@emotion/react";
+import Layout from "./components/Layout/Layout";
+import { theme } from "./utils/theme";
 
 function App() {
 	return (
-		<Layout>
-			<main></main>
-		</Layout>
+		<ThemeProvider theme={theme}>
+			<Layout>
+				<main></main>
+			</Layout>
+		</ThemeProvider>
 	);
 }
 
