@@ -11,7 +11,7 @@ import {
 import { Stack } from "@mui/system";
 
 interface CardProps {
-	productData: Product
+	productData: Product;
 }
 
 export default function (props: CardProps) {
@@ -21,11 +21,14 @@ export default function (props: CardProps) {
 		<Card
 			sx={{
 				p: 1.5,
-				maxWidth: "16rem",
-				minHeight: "360px",
+				maxWidth: "268px",
+				height: "360px",
+				margin: "0 auto",
 				boxShadow: "none",
 				border: "solid 1px #d1d1d1",
 				borderRadius: "12px",
+				display: "flex",
+				flexFlow: "column",
 			}}
 		>
 			<div
@@ -38,7 +41,10 @@ export default function (props: CardProps) {
 				<CardMedia
 					height="180px"
 					component="img"
-					src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+					src={productData.imageSource}
+					style={{
+						objectFit: "contain",
+					}}
 					alt={`${productData.title} image`}
 				/>
 				{productData.discount && (
@@ -48,6 +54,7 @@ export default function (props: CardProps) {
 							fontSize: 12,
 							textAlign: "center",
 							borderRadius: 12,
+              boxShadow: "none",
 							fontWeight: 600,
 							fontFamily: "Poppins",
 							width: 54,
@@ -62,13 +69,20 @@ export default function (props: CardProps) {
 					</Paper>
 				)}
 			</div>
-			<CardContent sx={{ p: 0, mt: 2 }}>
+			<CardContent sx={{ p: 0, mt: 2, flex: 1 }}>
 				<Typography variant="body1" sx={{ fontWeight: 500 }}>
 					{productData.title}
 				</Typography>
 				<Typography
 					variant="caption"
-					sx={{ color: "#575757", mt: 0.25, lineHeight: "16px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}
+					sx={{
+						color: "#575757",
+						mt: 0.25,
+						lineHeight: "16px",
+						overflow: "hidden",
+						textOverflow: "ellipsis",
+						whiteSpace: "nowrap",
+					}}
 					component="p"
 				>
 					{productData.subtitle}
@@ -94,7 +108,7 @@ export default function (props: CardProps) {
 										(productData.price * (100 - productData.discount)) /
 										100
 								  ).toFixed(2)
-								: productData.price}{" "}
+								: productData.price.toFixed(2)}{" "}
 							USD
 						</Typography>
 						{productData.discount && (

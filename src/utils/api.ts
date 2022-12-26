@@ -12,6 +12,7 @@ export function getProducts(): Products {
 			},
 			imageSource: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
 			rating: 3.9,
+      discount: 30,
 		},
 		{
 			id: "2",
@@ -31,6 +32,7 @@ export function getProducts(): Products {
 			id: "3",
 			title: "Mens Cotton Jacket",
 			price: 55.99,
+      discount: 15,
 			subtitle:
 				"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
 			category: {
@@ -73,6 +75,7 @@ export function getProducts(): Products {
 			id: "6",
 			title: "Solid Gold Petite Micropave ",
 			price: 168,
+      discount: 20,
 			subtitle:
 				"Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
 			category: {

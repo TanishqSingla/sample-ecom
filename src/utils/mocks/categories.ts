@@ -15,3 +15,7 @@ export const categories: { data: Categories } = {
 		},
 	],
 };
+
+export const getCategories = () => {
+	return categories.data
+}
