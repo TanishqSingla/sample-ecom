@@ -1,5 +1,6 @@
 import {
 	AccountCircleOutlined,
+	Close,
 	Search,
 	ShoppingBagOutlined,
 } from "@mui/icons-material";
@@ -10,12 +11,18 @@ import {
 	IconButton,
 	InputBase,
 	Paper,
+	Popover,
 	Stack,
 	Typography,
 } from "@mui/material";
+import { useState } from "react";
 import NavItem from "../UI/NavItem/NavItem";
 
 export default function () {
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+	const open = Boolean(anchorEl);
+
 	return (
 		<>
 			<Stack
@@ -61,7 +68,10 @@ export default function () {
 					<IconButton sx={{ h: 4, w: 4 }}>
 						<AccountCircleOutlined sx={{ color: "primary.dark" }} />
 					</IconButton>
-					<IconButton sx={{ h: 4, w: 4 }}>
+					<IconButton
+						sx={{ h: 4, w: 4 }}
+						onClick={(event) => setAnchorEl(event.currentTarget)}
+					>
 						<Badge
 							badgeContent={2}
 							color="secondary"
@@ -72,20 +82,20 @@ export default function () {
 					</IconButton>
 				</Stack>
 			</Stack>
-			<nav style={{ background: "#F9F9F9", padding: "12px 24px" }}>
-				<Stack direction="row" gap="16px">
-					<NavItem items={["Bread", "Cakes"]}>Bakery</NavItem>
-					<NavItem items={["Seasonal", "Exotic"]}>
-						Fruits and Vegetables
-					</NavItem>
-					<NavItem>Meat and Fish</NavItem>
-					<NavItem>Drinks</NavItem>
-					<NavItem>Kitchen</NavItem>
-					<NavItem>Special Nutrition</NavItem>
-					<NavItem>Baby</NavItem>
-					<NavItem>Pharmacy</NavItem>
+			<Popover
+				open={open}
+				anchorEl={anchorEl}
+				anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+				transformOrigin={{vertical: "top", horizontal: "right"}}
+				onClose={() => setAnchorEl(null)}
+			>
+				<Stack sx={{ width: 400, p: 2, minHeight: 600 }}>
+					<Stack direction="row" justifyContent="space-between">
+						<Typography sx={{fontSize: '26px', fontWeight: 600}}>Shopping Cart</Typography>
+						<IconButton onClick={() => setAnchorEl(null)}><Close /></IconButton>
+					</Stack>
 				</Stack>
-			</nav>
+			</Popover>
 		</>
 	);
 }

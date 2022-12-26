@@ -1,4 +1,5 @@
 import {
+  Button,
 	Checkbox,
 	FormControlLabel,
 	Rating,
@@ -18,8 +19,6 @@ export default function () {
 		const data = getCategories();
 		setCategories(data);
 	}, []);
-
-	const handleApply = () => {};
 
 	return (
 		<Stack sx={{ ml: 2 }} gap={4}>
@@ -64,6 +63,10 @@ export default function () {
 				</Typography>
 				<PriceRange />
 			</div>
+      <Stack direction="row" gap="16px">
+        <Button variant="contained">Apply</Button>
+        <Button>Reset</Button>
+      </Stack>
 		</Stack>
 	);
 }
