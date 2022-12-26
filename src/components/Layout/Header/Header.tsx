@@ -10,11 +10,13 @@ import {
 	Badge,
 	Box,
 	Button,
+	Chip,
 	Divider,
 	IconButton,
 	InputBase,
 	Paper,
 	Popover,
+	Rating,
 	Stack,
 	Typography,
 } from "@mui/material";
@@ -108,57 +110,140 @@ export default function () {
 						<Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">
 							<Typography>Cart Empty</Typography>
 						</Stack>
-					) : (cartState.map((cart) => {
-						return <Stack sx={{p: 2}}>
-							<div style={{ display: "flex" }}>
-								<div>
-									<div
-										style={{
-											height: 68,
-											width: 100,
-											overflow: "hidden",
-											borderRadius: 12,
-										}}
-									>
-										<img
-											style={{ objectFit: "contain" }}
-											src={cartState[0].product.imageSource}
-											width="100%"
-											height="100%"
-										/>
+					) : (
+						cartState.map((cart) => {
+							return (
+								<Stack sx={{ p: 2 }} key={cart.product.id}>
+									<div style={{ display: "flex", gap: "8px" }}>
+										<div>
+											<div
+												style={{
+													height: 68,
+													width: 100,
+													overflow: "hidden",
+													borderRadius: 12,
+												}}
+											>
+												<img
+													style={{ objectFit: "contain" }}
+													src={cart.product.imageSource}
+													width="100%"
+													height="100%"
+												/>
+											</div>
+											<Stack>
+												<Button
+													sx={{ color: "#151515" }}
+													startIcon={
+														<FavoriteBorderOutlined fontSize="small" />
+													}
+												>
+													<Typography
+														component="span"
+														sx={{ fontSize: "12px" }}
+													>
+														Wishlist
+													</Typography>
+												</Button>
+												<Button
+													sx={{ color: "#151515" }}
+													startIcon={<DataSaverOff fontSize="small" />}
+												>
+													<Typography
+														component="span"
+														sx={{ fontSize: "12px" }}
+													>
+														Compare
+													</Typography>
+												</Button>
+												<Button
+													sx={{ color: "#151515" }}
+													onClick={() =>
+														dispatch({ type: "REMOVE", payload: cart.product })
+													}
+													startIcon={<Close fontSize="small" />}
+												>
+													<Typography
+														component="span"
+														sx={{ fontSize: "12px" }}
+													>
+														Remove
+													</Typography>
+												</Button>
+											</Stack>
+										</div>
+										<Stack>
+											<Typography sx={{ fontWeight: 500, fontSize: 15 }}>
+												{cart.product.title}
+											</Typography>
+											<Rating
+												readOnly
+												value={cart.product.rating}
+												size="small"
+												sx={{ mt: 2 }}
+											/>
+											<Stack direction="row" justifyContent={"space-between"}>
+												<Stack sx={{ mt: 2 }}>
+													<Typography
+														color={"primary"}
+														sx={{ fontWeight: 600, fontSize: "18px" }}
+													>
+														{cart.product.discount
+															? (
+																	(cart.product.price *
+																		(100 - cart.product.discount)) /
+																	100
+															  ).toFixed(2)
+															: cart.product.price.toFixed(2)}{" "}
+														USD
+													</Typography>
+													{cart.product.discount && (
+														<Typography
+															sx={{
+																textDecoration: "line-through",
+																fontWeight: 600,
+																color: "#A9A9A9",
+																fontSize: "12px",
+															}}
+														>
+															{cart.product.price.toFixed(2)}
+														</Typography>
+													)}
+												</Stack>
+												<Chip label={`${cart.count} Pcs`} />
+											</Stack>
+										</Stack>
 									</div>
-									<Stack>
-										<Button
-											sx={{color: "#151515"}}
-											startIcon={<FavoriteBorderOutlined fontSize="small" />}
-										>
-											<Typography component="span" sx={{ fontSize: "12px" }}>
-												Wishlist
-											</Typography>
-										</Button>
-										<Button
-											sx={{color: "#151515"}}
-											startIcon={<DataSaverOff fontSize="small" />}
-										>
-											<Typography component="span" sx={{ fontSize: "12px" }}>
-												Compare
-											</Typography>
-										</Button>
-										<Button
-											sx={{color: "#151515"}}
-											onClick={() => dispatch({type: "REMOVE", payload: cart.product})}
-											startIcon={<Close fontSize="small" />}
-										>
-											<Typography component="span" sx={{ fontSize: "12px" }}>
-												Remove
-											</Typography>
-										</Button>
-									</Stack>
-								</div>
-							</div>
-							<Divider />
-						</Stack>})
+									<Divider />
+								</Stack>
+							);
+						})
 					)}
+					<div style={{ flex: 1 }} />
+					<Stack>
+						<Typography sx={{ fontSize: 12, fontWeight: 600 }}>
+							Subtotal
+						</Typography>
+						<Typography sx={{ fontWeight: 600, fontSize: 26 }}>
+							{cartState
+								.reduce((accumulator, currentCart) => {
+									let discount = currentCart.product.discount || 0;
+									let finalPrice =
+										currentCart.product.price * ((100 - discount) / 100);
+									return accumulator + finalPrice;
+								}, 0)
+								.toFixed(2)}{" "}
+							USD
+						</Typography>
+					</Stack>
+				</Stack>
+				<Stack
+					direction="row"
+					justifyContent="space-between"
+					sx={{ p: 2, borderTop: "solid 1px #d1d1d1" }}
+				>
+					<Button onClick={() => setAnchorEl(null)}>Continue Shopping</Button>
+					<Button variant="contained">Proceed to Checkout</Button>
 				</Stack>
 			</Popover>
 		</>
