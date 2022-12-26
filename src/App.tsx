@@ -1,24 +1,23 @@
 import { ThemeProvider } from "@emotion/react";
+import { useEffect, useState } from "react";
 import Layout from "./components/Layout/Layout";
 import ProductCard from "./components/ProductCard/ProductCard";
+import { getProducts } from "./utils/api";
 import { theme } from "./utils/theme";
 
 function App() {
+	const [products, setProducts] = useState<Products>();
+
+	useEffect(() => {
+		const data = getProducts();
+		setProducts(data);
+	}, [])
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Layout>
 				<main>
-					<ProductCard
-						productData={{
-							title: "test",
-							subtitle: "lorem ipsum dolor",
-							rating: 3,
-							imageSource: "",
-							discount: 36,
-							price: 48.0,
-							category: { categoryName: "Electronics", id: "electronics" },
-						}}
-					/>
+					{products && products.map(product => <ProductCard productData={product} key={product.id} />)}
 				</main>
 			</Layout>
 		</ThemeProvider>

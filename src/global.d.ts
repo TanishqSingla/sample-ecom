@@ -15,7 +15,7 @@ declare global {
     imageSource: string,
     rating:  number,
     price: number,
-    discount: number,
+    discount?: number,
     category: Category,
   }
   type Products = Product[]

@@ -22,7 +22,7 @@ export default function (props: CardProps) {
 			sx={{
 				p: 1.5,
 				maxWidth: "16rem",
-				height: "360px",
+				minHeight: "360px",
 				boxShadow: "none",
 				border: "solid 1px #d1d1d1",
 				borderRadius: "12px",
@@ -68,7 +68,7 @@ export default function (props: CardProps) {
 				</Typography>
 				<Typography
 					variant="caption"
-					sx={{ color: "#575757", mt: 0.25 }}
+					sx={{ color: "#575757", mt: 0.25, lineHeight: "16px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}
 					component="p"
 				>
 					{productData.subtitle}
@@ -80,7 +80,7 @@ export default function (props: CardProps) {
 					sx={{ my: 1 }}
 				/>
 			</CardContent>
-			<CardActions sx={{ px: 0, mt: 2 }}>
+			<CardActions sx={{ px: 0 }}>
 				<Stack
 					direction="row"
 					justifyContent="space-between"

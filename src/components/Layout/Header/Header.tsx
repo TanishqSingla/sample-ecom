@@ -7,12 +7,10 @@ import {
 	Badge,
 	Box,
 	Divider,
-	Grid,
 	IconButton,
 	InputBase,
 	Paper,
 	Stack,
-	TextField,
 	Typography,
 } from "@mui/material";
 import NavItem from "../UI/NavItem/NavItem";
@@ -20,9 +18,8 @@ import NavItem from "../UI/NavItem/NavItem";
 export default function () {
 	return (
 		<>
-			<Grid
+			<Stack
 				direction="row"
-				container
 				justifyContent="space-between"
 				alignItems="flex-end"
 				sx={{ p: 4 }}
@@ -74,7 +71,7 @@ export default function () {
 						</Badge>
 					</IconButton>
 				</Stack>
-			</Grid>
+			</Stack>
 			<nav style={{ background: "#F9F9F9", padding: "12px 24px" }}>
 				<Stack direction="row" gap="16px">
 					<NavItem items={["Bread", "Cakes"]}>Bakery</NavItem>
