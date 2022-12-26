@@ -17,4 +17,17 @@ export const theme = createTheme({
 	typography: {
 		fontFamily: ["Poppins", "sans-serif"].join(","),
 	},
+	components: {
+		MuiButton: {
+			styleOverrides: {
+				root: {
+					textTransform: 'none',
+					boxShadow: 'none',
+					"&:hover": {
+						boxShadow: "none",
+					}
+				}
+			}
+		}
+	}
 });

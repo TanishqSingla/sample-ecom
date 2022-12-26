@@ -1,11 +1,22 @@
-import { Card, CardMedia, Chip, Paper, Typography } from "@mui/material";
+import {
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	CardMedia,
+	Chip,
+	Paper,
+	Rating,
+	Typography,
+} from "@mui/material";
+import { Stack } from "@mui/system";
 
 interface CardProps {
 	id?: string;
 	title: string;
 	subtitle: string;
 	imageSource: string;
-	rating: string | number;
+	rating: number;
 	price: number;
 	discount?: number;
 }
@@ -14,7 +25,7 @@ export default function (props: CardProps) {
 	return (
 		<Card
 			sx={{
-				p: 2,
+				p: 1.5,
 				maxWidth: "16rem",
 				height: "360px",
 				boxShadow: "none",
@@ -56,6 +67,54 @@ export default function (props: CardProps) {
 					</Paper>
 				)}
 			</div>
+			<CardContent sx={{ p: 0, mt: 2 }}>
+				<Typography variant="body1" sx={{ fontWeight: 500 }}>
+					{props.title}
+				</Typography>
+				<Typography
+					variant="caption"
+					sx={{ color: "#575757", mt: 0.25 }}
+					component="p"
+				>
+					{props.subtitle}
+				</Typography>
+				<Rating readOnly value={props.rating} size="small" sx={{ my: 1 }} />
+			</CardContent>
+			<CardActions sx={{ px: 0, mt: 2 }}>
+				<Stack
+					direction="row"
+					justifyContent="space-between"
+					alignItems="center"
+					width="100%"
+				>
+					<Stack>
+						<Typography sx={{ fontWeight: 600, fontSize: "18px" }}>
+							{props.discount
+								? ((props.price * (100 - props.discount))/100).toFixed(
+										2
+								  )
+								: props.price}{" "}
+							USD
+						</Typography>
+            {props.discount && <Typography sx={{fontWeight: 600, color: "#A9A9A9", fontSize: "12px"}}>
+              {props.price}
+            </Typography>}
+					</Stack>
+					<Button
+						variant="contained"
+						sx={{
+							border: "solid 2px #46760A",
+							background: "#6A983C",
+							borderRadius: "12px",
+              "&:hover": {
+                background: "#46760A"
+              }
+						}}
+					>
+						Add to cart
+					</Button>
+				</Stack>
+			</CardActions>
 		</Card>
 	);
 }

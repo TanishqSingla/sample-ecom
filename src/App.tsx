@@ -8,7 +8,7 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<Layout>
 				<main>
-					<ProductCard title="test" subtitle="lorem ipsum dolor" rating={3} price={21.1} imageSource="" discount={36}/>
+					<ProductCard title="test" subtitle="lorem ipsum dolor" rating={3} price={48.56} imageSource="" discount={36}/>
 				</main>
 			</Layout>
 		</ThemeProvider>

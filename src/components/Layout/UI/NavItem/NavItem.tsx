@@ -18,7 +18,7 @@ export default function (props: Props) {
 	return (
 		<div>
 			<Button
-				sx={{ color: "#151515", textTransform: "none", fontSize: "15px" }}
+				sx={{ color: "primary.dark", fontSize: "15px" }}
 				onClick={handleClick}
 			>
 				{props.children}
